@@ -11,7 +11,8 @@ export default class App extends React.Component {
     fontLoaded: false,
   };
 
-  hello;
+  public hello: Audio.Sound;
+  private urmom: number;
   
   async componentDidMount() {
     await Font.loadAsync({
