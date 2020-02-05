@@ -1,14 +1,47 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableWithoutFeedback } from 'react-native';
 
 import { Audio } from 'expo-av';
 
 import * as Font from 'expo-font';
 
+class Barry extends React.Component {
+  private hello: Audio.Sound;
+
+  async componentDidMount() {
+    this.hello = new Audio.Sound();
+    try {
+      await this.hello.loadAsync(require('./assets/sounds/effects/bruh.mp3'));
+      
+      // Your sound is playing!
+    } catch (error) {
+      // An error occurred!
+    }
+  }
+
+  render() {
+    return (
+
+    
+      <TouchableWithoutFeedback onPress={async () => await this.hello.playAsync()}>
+        <View>
+          
+  
+          <Image 
+            style={styles.barry}
+            source={require('./assets/BarryLindler.jpg')} />
+  
+        </View>
+      </TouchableWithoutFeedback>
+    );
+  } 
+}
+
 export default class App extends React.Component {
 
   state = {
     fontLoaded: false,
+    soundLoaded: false,
   };
 
   public hello: Audio.Sound;
@@ -18,15 +51,18 @@ export default class App extends React.Component {
     await Font.loadAsync({
       'Ruluko': require('./assets/fonts/Ruluko-Regular.ttf'),
     });
+    
+    const soundObject = new Audio.Sound();
+    try {
+      await soundObject.loadAsync(require('./assets/sounds/effects/bruh.mp3'));
+      await soundObject.playAsync();
+      // Your sound is playing!
+    } catch (error) {
+      // An error occurred!
+    }
+    
 
-    // this.hello = new Sound('happybirthday.mp3', Sound.MAIN_BUNDLE, (error) => {
-    //   if(error) {
-    //     console.log('Failed to load happybirthday.mp3', error);
-    //     return;
-    //   }
-    // });
-
-    this.setState({ fontLoaded: true });
+    this.setState({ fontLoaded: true, soundLoaded: true });
   }
 
   render() {
@@ -37,10 +73,10 @@ export default class App extends React.Component {
             <Text style={styles.header}>Vary Barry</Text>
           ) : null
         }
+
+        <Barry />
         
-        <Image 
-          style={styles.barry}
-          source={require('./assets/BarryLindler.jpg')} />
+        
       </View>
     );
   }
