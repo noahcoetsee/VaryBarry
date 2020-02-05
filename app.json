@@ -30,7 +30,14 @@
     },
     "android": {
       "package": "com.featuredspace.varybarry",
-      "versionCode": 1
-    }
+      "versionCode": 1,
+      "publishBundlePath": "android\\app\\src\\main\\assets\\shell-app.bundle",
+      "publishManifestPath": "android\\app\\src\\main\\assets\\shell-app-manifest.json"
+    },
+    "isDetached": true,
+    "detach": {
+      "androidExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/android-v2.14.2-sdk36.0.0-51bb3c16-c2a5-4797-b721-4091ed00e53a.tar.gz"
+    },
+    "scheme": "exp5c664f83fe5f42c2a2ed6804532fa944"
   }
 }
