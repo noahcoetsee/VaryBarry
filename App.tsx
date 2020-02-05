@@ -6,13 +6,19 @@ import { Audio } from 'expo-av';
 import * as Font from 'expo-font';
 
 class Barry extends React.Component {
-  private hello: Audio.Sound;
+  public hello: Audio.Sound;
+
+  public sounds: string[];
 
   async componentDidMount() {
     this.hello = new Audio.Sound();
+  }
+
+  async playBruh() {
+    const soundObject = new Audio.Sound();
     try {
-      await this.hello.loadAsync(require('./assets/sounds/effects/bruh.mp3'));
-      
+      await soundObject.loadAsync(require('./assets/sounds/effects/bruh.mp3'));
+      await soundObject.playAsync();
       // Your sound is playing!
     } catch (error) {
       // An error occurred!
@@ -23,13 +29,13 @@ class Barry extends React.Component {
     return (
 
     
-      <TouchableWithoutFeedback onPress={async () => await this.hello.playAsync()}>
+      <TouchableWithoutFeedback onPress={this.playBruh}>
         <View>
           
   
           <Image 
             style={styles.barry}
-            source={require('./assets/BarryLindler.jpg')} />
+            source={require('./assets/images/Barry.png')} />
   
         </View>
       </TouchableWithoutFeedback>
@@ -52,14 +58,7 @@ export default class App extends React.Component {
       'Ruluko': require('./assets/fonts/Ruluko-Regular.ttf'),
     });
     
-    const soundObject = new Audio.Sound();
-    try {
-      await soundObject.loadAsync(require('./assets/sounds/effects/bruh.mp3'));
-      await soundObject.playAsync();
-      // Your sound is playing!
-    } catch (error) {
-      // An error occurred!
-    }
+    
     
 
     this.setState({ fontLoaded: true, soundLoaded: true });
@@ -105,6 +104,6 @@ const styles = StyleSheet.create({
   barry: {
     top: -69,
     width: 250,
-    height: 300
+    height: 325
   }
 });
